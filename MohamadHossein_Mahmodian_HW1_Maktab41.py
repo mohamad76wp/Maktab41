@@ -216,4 +216,3 @@ print(commission_calc(1,10,1002))
 print(commission_calc(1,15,1003))
 print(commission_calc(4,20,1005))
 print(commission_calc(2,1))
-

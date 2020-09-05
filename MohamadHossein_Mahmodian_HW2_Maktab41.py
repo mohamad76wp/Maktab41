@@ -1,36 +1,36 @@
 import random
 
-# chance = 10
-# answer = random.randint(1,100)
-# while True:
-#     guess = input(f'Input your Guess "1 - 100" and {chance} chance left:')
+chance = 10
+answer = random.randint(1,100)
+while True:
+    guess = input(f'Input your Guess "1 - 100" and {chance} chance left:')
 
-#     if chance > 1:
-#         try:
-#             guess_type = type(eval(guess))
-#             if guess_type == int:
-#                 chance -= 1
-#                 guess = int(guess)
-#                 if guess == answer:
-#                     print('**** You win :) ****')
-#                     break
+    if chance > 1:
+        try:
+            guess_type = type(eval(guess))
+            if guess_type == int:
+                chance -= 1
+                guess = int(guess)
+                if guess == answer:
+                    print('**** You win :) ****')
+                    break
 
-#                 elif guess > answer:
-#                     print('Too High +')
+                elif guess > answer:
+                    print('Too High +')
 
-#                 else:
-#                     print('Too low -')
+                else:
+                    print('Too low -')
 
-#             else:
-#                 print(f'<<your entry is {guess_type.__name__} please give me integer>>')
+            else:
+                print(f'<<your entry is {guess_type.__name__} please give me integer>>')
 
-#         except NameError:
-#             print(f'<<your entry is string please give me integer>>')
-#         print('')
+        except NameError:
+            print(f'<<your entry is string please give me integer>>')
+        print('')
 
-#     else: 
-#         print("No chance \nxxxx You lose :( xxxx")
-#         break
+    else: 
+        print("No chance \nxxxx You lose :( xxxx")
+        break
 
 
 
