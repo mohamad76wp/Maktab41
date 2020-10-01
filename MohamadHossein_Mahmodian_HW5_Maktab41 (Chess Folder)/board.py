@@ -12,7 +12,6 @@ class Board:
 
     def __init__(self):
         self.square_dict = {(i, j): Square(color=self.color_numbers[(i+j) % 2], position=(i, j)) for i in range(8) for j in range(8)}
-        print('hi')
     def reset_pieces_on_board(self):
         # remove all pieces --------------------------
         for this_square in self.square_dict.values():
@@ -51,18 +50,19 @@ class Board:
         print(type(my_piece))
         if my_piece:
             movement_list = my_piece.get_moving_possibility()
+            print(f'xx{movement_list}')
 
-            if new_position in movement_list:
-                self.square_dict[new_position].set_piece(my_piece)
-                my_piece.get_piece_coordinate(new_position[0], new_position[2])
-                self.square_dict[old_position].remove_piece()
-                return "done"
+            # if new_position in movement_list:
+            #     self.square_dict[new_position].set_piece(my_piece)
+            #     my_piece.get_piece_coordinate(new_position[0], new_position[2])
+            #     self.square_dict[old_position].remove_piece()
+            #     return "done"
 
-            else:
-                return "error"
-
-        else:
-            return "error"
+        #     else:
+        #         return "error"
+        #
+        # else:
+        #     return "error"
 
     def show_board(self):
         board = []
@@ -77,5 +77,8 @@ class Board:
 
 my_board = Board()
 my_board.reset_pieces_on_board()
-print(my_board.move_piece((0,3),(0,2)))
+print(my_board.move_piece((1,0),(0,2)))
+print(my_board.move_piece((1,1),(0,2)))
+print(my_board.move_piece((6,1),(0,2)))
+
 # print(my_board.square_dict[(0, 0)].piece.piece_color)
