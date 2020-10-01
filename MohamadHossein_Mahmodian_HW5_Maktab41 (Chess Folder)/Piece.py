@@ -27,15 +27,32 @@ class Rook:
         
     def get_moving_possibility(self):
 
+        dimention_list = list()
         if self.row == 0 and self.column == 0:
-            return f'the {self.piece_color} Rook is in home and possible moves : ({self.row + 1 },{self.column}) or ' \
-                   f'({self.row},{self.column + 1}) '
+            for counter in range(0,8):
+                dimention = (self.row + counter,self.column)
+                dimention_list.append(dimention)
+
+            for counter in range(0,8):
+                dimention = (self.row,self.column + counter)
+                dimention_list.append(dimention)
+
+            return f'the {self.piece_color} Rook is in home and possible moves : {dimention_list} '
 
         elif self.row == 7 and self.column == 7:
-            return f'the {self.piece_color} Rook is in home and possible moves : ({self.row - 1 },{self.column}) or ' \
-                   f'({self.row},{self.column - 1}) '
 
-        else:
+            for counter in range(0,8):
+                dimention = (self.row - counter,self.column)
+                dimention_list.append(dimention)
+
+            for counter in range(0,8):
+                dimention = (self.row,self.column - counter)
+                dimention_list.append(dimention)
+
+
+            return f'the {self.piece_color} Rook is in home and possible moves : {dimention_list} '
+
+        else: # This part is not reachable becuse the rook is not out of home
             possessive_value_row = self.row - 7
             possessive_value_column = self.column - 7
             print(possessive_value_row)
@@ -46,13 +63,16 @@ class Rook:
             print(negative_value_row)
             print(negative_value_column)
 
-            x = f'the {self.piece_color} Rook is not in home and possible moves : ' \
-                   f'({self.row + possessive_value_row },{self.column}) or' \
-                   f' ({self.row},{self.column + possessive_value_column}) '
+            for counter in range(self.row,possessive_value_row + 1):
+                dimention = (self.row - counter,self.column)
+                dimention_list.append(dimention)
 
-            return f'the {self.piece_color} Rook is not in home and possible moves : ' \
-                   f'({self.row + possessive_value_row },{self.column}) or' \
-                   f' ({self.row},{self.column + possessive_value_column}) '
+            for counter in range(self.column , possessive_value_column - 1 ):
+                dimention = (self.row,self.column - counter)
+                dimention_list.append(dimention)
+
+            return f'the {self.piece_color} ook is not in home and possible moves : {dimention_list}'
+
 
 
 class Knight:
