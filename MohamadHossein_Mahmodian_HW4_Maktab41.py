@@ -1,19 +1,22 @@
 from random import randint 
 import functools as f
 
-table = [[0,0,0,],[0,0,0,],[0,0,0,]]
+table = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+
 
 def view_table(table):
     for row in table:
         print(row)
 
+
 def set_cpu():
-    i ,j = randint(0,2),randint(0,2)
+
+    i , j = randint(0, 2), randint(0, 2)
     while table[i][j] != 0:
-        multi =[f.reduce(lambda a,b: a*b,i)for i in table]
+        multi = [f.reduce(lambda a, b: a*b, i)for i in table]
         print(multi)
         if 0 in multi:
-            i ,j = randint(0,2),randint(0,2)
+            i , j = randint(0, 2), randint(0, 2)
         else:
             result = master(table)
             return result
@@ -22,7 +25,7 @@ def set_cpu():
         return table
 
 
-def set_user(i,j):
+def set_user(i, j):
     while table[i][j] != 0:
         print('Oops select empty cell')
         return False
@@ -30,11 +33,13 @@ def set_user(i,j):
         table[i][j] = 1
         return table
 
+
 def validator(sumx):
     if sumx == 3:
         return True
     elif sumx == -3:
         return False
+
 
 def rows(page):
     for sublist in page:
@@ -43,6 +48,7 @@ def rows(page):
             return 'You Win'         
         elif validator(sumx) == False:  
             return 'CPU Win'
+
 
 def column(page):
     for counter in range(3):
@@ -64,6 +70,7 @@ def orib(page):
         elif validator(sumx) == False:  
             return 'CPU Win'
 
+
 def xorib(page):
     x = 2
     sumx = 0
@@ -74,6 +81,7 @@ def xorib(page):
             return 'You Win' 
         elif validator(sumx) == False:  
             return 'CPU Win' 
+
 
 def master(page):
     if rows(page) != None:
@@ -92,8 +100,8 @@ view_table(table)
 
 
 while True:
-    i,j = map(int,input('Give me i, j:').split())
-    stat = set_user(i,j)
+    i, j = map(int, input('Give me i,  j:').split())
+    stat = set_user(i, j)
     if stat == False:
         continue
     stat = set_cpu()
