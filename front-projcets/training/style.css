@@ -1,0 +1,28 @@
+
+.box-span-center{
+    background-color: #f2f2f2;
+    width: 500px;
+    height: 320px;
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 50px 30px;
+}
+
+.text-area{
+    border: none;
+    border-left:solid 5px #4CAF50;
+    width: 450px;
+    height: 250px;
+    display: block;
+    margin-top: 5px;
+}
+
+
+input[type=submit]{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 10px;
+    margin-top: 5px;
+
+}

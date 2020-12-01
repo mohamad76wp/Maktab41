@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- <input id="input-test" type="text" >
+    <input type="submit" value="send" onclick="submit()"  > -->
+    <div class="main">
+      <div class="form">
+        <h5>SignUP</h5>
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="text-filed"
+          id="username"
+          placeholder="username"
+        />
+        <small id="username-helper">username length</small>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="text-filed"
+          id="password"
+          placeholder="Password"
+        />
+        <small id="password-helper">password length</small>
+
+        <label for="age">Age</label>
+        <input type="text" class="text-filed" id="age" placeholder="age" />
+        <small id="age-helper">age must be a number</small>
+
+        <button id="signup" onclick="signup()">signup</button>
+      </div>
+    </div>
+    <script src="./index.js"></script>
+    <script src="./validate.js"></script>
+    
+  </body>
+</html>
