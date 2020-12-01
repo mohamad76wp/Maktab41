@@ -1,0 +1,126 @@
+/* 
+#cdeb8b BG-Green
+#d9e8fb Box-blue
+#738cab Border-blue
+#ffe6cd Box-pink
+#c19a3d Border-pink  */
+
+
+.container-1{
+    display: flex;
+    justify-content: space-between;
+    background-color: #cdeb8b;
+    width: 330px;
+    height: 60px;
+}
+
+
+.container-2{
+    display: flex;
+    justify-content:space-between;
+    background-color: #cdeb8b;
+    width: 330px;
+    height: 60px;
+}
+
+.container-2-1{
+    display: flex;
+    justify-content:flex-start;
+    background-color: #cdeb8b;
+    width: 330px;
+    height: 60px;}
+
+.container-2-2{
+    display: flex;
+    justify-content:flex-end;
+    background-color: #cdeb8b;
+    width: 330px;
+    height: 60px;}
+
+
+.container-3{
+    display: flex;
+    justify-content:space-between;
+    background-color: #cdeb8b;
+
+    width: 330px;
+    height: 60px;
+}
+
+.container-4{
+    display: flex;
+    justify-content:space-around;
+    background-color: #cdeb8b;
+    width: 330px;
+    height: 60px;
+    
+}
+
+.container-4-1{
+    display: flex;
+    justify-content:flex-end;
+    background-color: #cdeb8b;
+    width: 330px;
+    height: 60px;
+}
+
+.container-5{
+    display: flex;
+    background-color: #cdeb8b;
+    width: 330px;
+    height: 60px;
+}
+
+.container-6{
+    display: flex;
+    justify-content: space-around;
+    background-color: #cdeb8b;
+
+    width: 330px;
+    height: 60px;
+}
+
+.container-6-1{
+    display: flex;
+    justify-content: flex-end;
+    background-color: #cdeb8b;
+    width: 330px;
+    height: 60px;
+} 
+.container-6-2{
+    display: flex;
+    justify-content: center;
+    background-color: #cdeb8b;
+    width: 330px;
+    height: 60px;
+}
+
+.container-7{
+    display: flex;
+    justify-content: space-between;
+    background-color: #cdeb8b;
+
+    width: 330px;
+    height: 60px;
+}
+
+
+
+.sub-container-blue{
+    
+    background-color: #d9e8fb;
+    border: solid 1px #738cab;
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+}
+
+
+.sub-container-pink{
+    
+    background-color: #ffe6cd;
+    border: solid 1px #c19a3d;
+    margin: 5px;
+    width: 130px;
+    height: 50px;
+}
