@@ -1,0 +1,64 @@
+
+body{
+    background-color: #01ffff;
+}
+
+.box {
+    position: relative ;
+    background-color: rgb(202, 201, 201);
+    height: 280px;
+    width: 300px;
+    float: right;
+}
+
+.container{
+    position: relative;
+    left: 50px;
+    top: 15px;
+}
+
+.back{
+    position: relative;
+    background-color: rgb(172, 172, 172);
+    border-radius: 10px;
+    height: 17px;
+    width: 200px;
+
+}
+
+.rebon1{
+    
+    background-color: #ef5690;
+    border-radius: 10px;
+    height: 17px;
+    width: 198px;
+}
+
+.rebon2{
+    
+    background-color: #e9a536;
+    border-radius: 10px;
+    height: 17px;
+    width: 180px;
+}
+
+.rebon3{
+    
+    background-color: #8cbd3a;
+    border-radius: 10px;
+    height: 17px;
+    width: 140px;
+}
+
+.rebon4{
+    
+    background-color: #449dba;
+    border-radius: 10px;
+    height: 17px;
+    width: 170px;
+}
+
+h5{
+    position: relative;
+    margin-bottom: 2px;
+}
