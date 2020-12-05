@@ -58,6 +58,28 @@ class Post_setting(models.Model):
         verbose_name_plural = _("Post_settings")
 
 
+
+class Comment_like(models.Model):
+    author = models.ForeignKey(User, verbose_name=(
+        _("Author")), on_delete=models.CASCADE)
+    comment = models.ForeignKey("Comment", verbose_name=(
+        _("Comment")),related_name="comment_like", related_query_name="comment_like", on_delete=models.CASCADE)
+    condition = models.BooleanField(_("Condition"))
+    create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
+    update_at = models.DateTimeField(_("Update at"), auto_now=True)
+
+    class Meta:
+        verbose_name = _("Comment_like")
+        verbose_name_plural = ("Comment_likes")
+
+    def __str__(self):
+        status = str(self.condition)
+        if status == True:
+            return "Like"
+        else:
+            return "Dislike"
+
+
 class Comment(models.Model):
     post = models.ForeignKey("Post", verbose_name=(
         _("Post")), on_delete=models.CASCADE)
@@ -76,24 +98,18 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
 
+    @property
+    def like_count(self):
+        query_set = Comment_like.ojects.filter(comment=self)
+        likes = query_set.filter(condition=True)
 
-class Comment_like(models.Model):
-    author = models.ForeignKey(User, verbose_name=(
-        _("Author")), on_delete=models.CASCADE)
-    comment = models.ForeignKey("Comment", verbose_name=(
-        _("Comment")), on_delete=models.CASCADE)
-    condition = models.BooleanField(_("Condition"))
-    create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
-    update_at = models.DateTimeField(_("Update at"), auto_now=True)
+        return likes.count()
 
-    class Meta:
-        verbose_name = _("Comment_like")
-        verbose_name_plural = ("Comment_likes")
+    @property
+    def dislike_count(self):
+        query_set = Comment_like.objects.filter(comment=self)
+        dislikes = query_set.filter(condition=False)
 
-    def __str__(self):
-        return str(self.condition)
+        return dislikes.count()
 
-# comment
-# comment like
-# post setting
-# post like
+
