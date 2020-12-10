@@ -1,7 +1,10 @@
 #by admin
+.gitignore
 other/
 .idea/
-
+training/
+zoomit-mohsen/  
+zoomit-ostad/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

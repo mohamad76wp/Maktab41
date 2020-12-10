@@ -10,19 +10,19 @@ from django.template import loader
 def index(request):
     posts = Post.objects.all()
 
-    template = loader.get_template('blog/posts.html')
     context = {
-        'posts': posts
+        'posts': posts,
     }
-    
 
-    return HttpResponse(template.render(context, request))
+    return render(request, "blog/posts.html", context)
 
 
 def single(request, slug):
 
     post = Post.objects.get(slug=slug)
 
-    content = f"<html><h1>{post.content}</h1></br><a href='{reverse('index')}'>home</a></html>"
+    context = {
+        'posts': post,
+    }
 
-    return HttpResponse(content)
+    return render(request, "blog/post_single.html", context)

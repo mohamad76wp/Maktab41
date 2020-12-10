@@ -48,23 +48,29 @@ class Post(models.Model):
 class Post_setting(models.Model):
     post = models.OneToOneField(
         "Post", verbose_name=("Post"), on_delete=models.CASCADE)
-    comment = models.BooleanField(_("Published"))
-    public = models.BooleanField(_("Public"))
-    author = models.BooleanField(_("Author"))
-    allow_discussion = models.BooleanField(_("Allow discussion"))
+    comment = models.BooleanField(_("Published"),default=True)
+    public = models.BooleanField(_("Public"),default=True)
+    author = models.BooleanField(_("Author"),default=True)
+    allow_discussion = models.BooleanField(_("Allow discussion"),default=True)
 
     class Meta:
         verbose_name = _("Post_setting")
         verbose_name_plural = _("Post_settings")
+
+    def __str__(self):
+        return str(self.post)
+
+
+
 
 
 
 class Comment_like(models.Model):
     author = models.ForeignKey(User, verbose_name=(
         _("Author")), on_delete=models.CASCADE)
-    comment = models.ForeignKey("Comment", verbose_name=(
+    comment = models.ForeignKey("blog.Comment", verbose_name=(
         _("Comment")),related_name="comment_like", related_query_name="comment_like", on_delete=models.CASCADE)
-    condition = models.BooleanField(_("Condition"))
+    condition = models.BooleanField(_("Condition"), default=True)
     create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
     update_at = models.DateTimeField(_("Update at"), auto_now=True)
 
