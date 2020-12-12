@@ -52,7 +52,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ("is_confirmed", "post", "author","like_count","dislike_count")
+    list_display = ("is_confirmed", "post", "author",)
     list_filter = ("is_confirmed",)
     search_fields = ("content",)
     date_hierarchy = ("create_at")

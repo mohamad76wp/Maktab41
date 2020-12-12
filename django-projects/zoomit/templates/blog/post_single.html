@@ -1,14 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+{%extends 'base/base.html'%}
+{%load static%}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post single</title>
-</head>
 
-<body>
-    <h1>hi</h1>
-</body>
 
-</html>
+
+{%block css%}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{%endblock%}
+
+{%block title%}
+zoomit | {{post.slug}}
+{%endblock%}
+
+
+{%block body%}
+<div class="container">
+    <div class="row p-2 m-5">
+        <div class="col-md-8 box-main p-5">
+            <h3 class="pl-1">{{post.title}}</h3>
+            <span class="badge badge-info float-right mb-3">{{category}}</span>
+            <div class="post-box">
+                <img src="{{post.image.url}}" class="card-img-top embed-responsive-item " alt="{{post.slug}}">
+
+                <p class="pt-3">{{post.content}}</p>
+
+
+                <small class="text-muted">{{post.publish_at}}</small>
+                <small class="text-muted"> Author:{{post.author}}</small>
+            </div>
+            <hr>
+            <h4 class="mt-5">Comments:</h4>
+            <div class="alert alert-secondary " role="alert">
+                <div class=" mt-3">
+                    {%for comment_single in comment%}
+                    <small class="text-dark text-uppercase font-weight-bold">{{comment_single.author}} </small>
+                    <small class="text-muted ">|| {{comment_single.create_at}}</small>
+                    <p class="mb-3 ml-2">
+                        {{comment_single.content}}
+                    </p>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+        <div class="col-4 box-side">
+            {%include 'blog/side_bar.html'%}
+        </div>
+    </div>
+
+{%endblock%}

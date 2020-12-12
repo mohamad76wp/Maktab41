@@ -1,8 +1,12 @@
 .box-main {
-    background-color:#e9e9e9;
+    background-color:#f0f1f4;
     
 }
 
 .box-side {
-    background-color:#d4d3d3;
+    background-color:#e8e8e8;
+}
+
+.bg-light{
+    background-color:#f0f1f4!important;
 }

@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="card bg-light mt-3 me" style="max-width: 18rem;">
+    <div class="card-header">Categories:</div>
+    <div class="card-body">
+        <p class="card-text">
+        <ul>
+            {%for category in categories%}
+            <li>
+                <a href="{%url 'category_single' category.slug%}">
+                    {{category.title}}
+                </a>
+
+            </li>
+            {%endfor%}
+        </ul>
+        </p>
+    </div>
+</div>

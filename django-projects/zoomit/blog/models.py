@@ -32,7 +32,7 @@ class Post(models.Model):
     draft = models.BooleanField(_("Draft"), default=True, db_index=True)
     image = models.ImageField(_("Image"), upload_to="post/images")
     category = models.ForeignKey(Category, verbose_name=(
-        _("category")), null=True, blank=True, on_delete=models.SET_NULL)
+        _("category")),related_name="category", related_query_name="category", null=True, blank=True, on_delete=models.SET_NULL)
     author = models.ForeignKey(User, verbose_name=(
         _("Author")), related_name="posts", related_query_name="posts", on_delete=models.CASCADE)
 
@@ -88,7 +88,7 @@ class Comment_like(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey("Post", verbose_name=(
-        _("Post")), on_delete=models.CASCADE)
+        _("Post")),related_name="comment", related_query_name="comment", on_delete=models.CASCADE )
     content = models.TextField(_("Content"))
     author = models.ForeignKey(User, verbose_name=(
         _("Author")), on_delete=models.CASCADE)
@@ -104,18 +104,18 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
 
-    @property
-    def like_count(self):
-        query_set = Comment_like.ojects.filter(comment=self)
-        likes = query_set.filter(condition=True)
+    # @property
+    # def like_count(self):
+    #     query_set = Comment_like.ojects.filter(comment=self)
+    #     likes = query_set.filter(condition=True)
 
-        return likes.count()
+    #     return likes.count()
 
-    @property
-    def dislike_count(self):
-        query_set = Comment_like.objects.filter(comment=self)
-        dislikes = query_set.filter(condition=False)
+    # @property
+    # def dislike_count(self):
+    #     query_set = Comment_like.objects.filter(comment=self)
+    #     dislikes = query_set.filter(condition=False)
 
-        return dislikes.count()
+        # return dislikes.count()
 
 

@@ -1,17 +1,19 @@
 {%extends 'base/base.html'%}
 {% load static %}
 
+{%block css%}
+<link rel="stylesheet" href="{% static 'css/style.css' %}"> {%endblock%}
+
 {%block title%}
 zoomit
 {%endblock%}
 
-{%block css%}
-<link rel="stylesheet" href="{% static 'css/style.css' %}"> {%endblock%}
+
 
 {%block body%}
 
 <div class="container">
-    <div class="row p-2">
+    <div class="row p-5 m-2">
         <div class="col-8 box-main">
             <div class="container">
                 {% for post in posts %}
@@ -25,7 +27,8 @@ zoomit
                             </a>
 
                             <p class="card-text">{{post.content}}</p>
-                            <p class="card-text"><small class="text-muted">{{post.publish_at}}</small></p>
+                            <p class="card-text"><small class="text-muted">{{post.publish_at}}</small>
+                            <span class="badge badge-info float-right mb-3">{{post.category}}</span></p>
 
                         </div>
                     </div>
@@ -33,7 +36,9 @@ zoomit
                 {%endfor%}
             </div>
         </div>
-        <div class="col-4 box-side">col-4</div>
+        <div class="col-4 box-side">
+            {%include 'blog/side_bar.html'%}
+        </div>
     </div>
 </div>
 
