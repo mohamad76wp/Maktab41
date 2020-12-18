@@ -1,3 +1,4 @@
+
 {%extends 'base/base.html'%}
 {% load static %}
 
@@ -16,19 +17,22 @@ zoomit
     <div class="row p-5 m-2">
         <div class="col-8 box-main">
             <div class="container">
-                {% for post in posts %}
+                {% for post in post_list %}
 
                 <div class="card-deck px-2 pt-3">
                     <div class="card">
                         <img src="{{post.image.url}}" class="card-img-top embed-responsive-item" alt="{{post.title}}">
                         <div class="card-body">
-                            <a class="stretched-link" href="{%url 'post_single' post.slug%}">
+                            <a class="link" href="{%url 'post_single' post.slug%}">
                                 <h5 class="card-title">{{post.title}}</h5>
                             </a>
 
                             <p class="card-text">{{post.content}}</p>
                             <p class="card-text"><small class="text-muted">{{post.publish_at}}</small>
-                            <span class="badge badge-info float-right mb-3">{{post.category}}</span></p>
+                            <a href="{%url 'category_single' post.category.slug%}"> 
+                                <span class="badge badge-info float-right mb-3">{{post.category}}</span>
+                            </a>
+                        </p>
 
                         </div>
                     </div>

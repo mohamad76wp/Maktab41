@@ -18,15 +18,16 @@ zoomit | {{post.slug}}
     <div class="row p-2 m-5">
         <div class="col-md-8 box-main p-5">
             <h3 class="pl-1">{{post.title}}</h3>
-            <span class="badge badge-info float-right mb-3">{{category}}</span>
-            <div class="post-box">
+            <small class="text-muted"> By:{{post.author}}</small>
+            <a href="{%url 'category_single' post.category.slug%}">   
+                <span class="badge badge-info float-right mb-3">{{post.category}}</span>
+            <div class="post-box"></a>
                 <img src="{{post.image.url}}" class="card-img-top embed-responsive-item " alt="{{post.slug}}">
 
                 <p class="pt-3">{{post.content}}</p>
 
 
                 <small class="text-muted">{{post.publish_at}}</small>
-                <small class="text-muted"> Author:{{post.author}}</small>
             </div>
             <hr>
             <h4 class="mt-5">Comments:</h4>

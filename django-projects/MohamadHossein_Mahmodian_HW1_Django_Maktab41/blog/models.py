@@ -87,7 +87,7 @@ class Comment_like(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey("Post", verbose_name=(
+    post = models.ForeignKey(Post, verbose_name=(
         _("Post")),related_name="comment", related_query_name="comment", on_delete=models.CASCADE )
     content = models.TextField(_("Content"))
     author = models.ForeignKey(User, verbose_name=(

@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import index, single,category_single
+from .views import category_single , Index,Single
 
 urlpatterns = [
-    path('', index, name="index"),
-    path('<slug:slug>', single, name="post_single"),
-    path('categories/<slug:slug>/', category_single, name='category_single'),
+    path('', Index.as_view(), name="index"),
+    path('<slug:slug>', Single.as_view(), name="post_single"),
+    path('categories/<slug:slug>', category_single, name='category_single'),
 ]
