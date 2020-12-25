@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
 
 
 class UserRegistrationForm(forms.Form):
@@ -12,3 +13,9 @@ class UserRegistrationForm(forms.Form):
         label=_('Repeat Password'), widget=forms.PasswordInput(), required=True)
     first_name = forms.CharField(label=_('First name'))
     last_name = forms.CharField(label=_('Last name'))
+
+    def clean(self):
+        password = self.cleaned_data.get('password', None)
+        confirm_password = self.cleaned_data.get('confirm_password', None)
+        if password != confirm_password:
+            raise ValidationError(_("Password is not match"), code='invalid')

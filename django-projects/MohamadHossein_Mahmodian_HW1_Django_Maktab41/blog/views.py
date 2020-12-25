@@ -1,26 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from .models import Post, Category
 from django.urls import reverse
 from django.template import loader
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserRegistrationForm
-# Create your views here.
-
-
-# def index(request):
-#     posts = Post.objects.all()
-
-#     categories = Category.objects.all()
-
-#     context = {
-#         'posts': posts,
-#         'categories': categories,
-#     }
-
-#     return render(request, "blog/posts.html", context)
 
 
 class Index(ListView):
@@ -34,8 +20,7 @@ class Index(ListView):
 
 
 def single(request, slug):
-
-    post = Post.objects.select_related('category',).get(slug=slug)
+    post = Post.objects.select_related('category', ).get(slug=slug)
     categories = Category.objects.all()
 
     context = {
@@ -46,19 +31,6 @@ def single(request, slug):
     }
 
     return render(request, "blog/post_single.html", context)
-
-# class Single(DetailView):
-#     model = Post
-#     template_name = "blog/post_single.html"
-
-#     def get_queryset(self):
-#         qs = super().get_queryset()
-#         return qs.select_related('comment')
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context ['categories'] = Category.objects.all()
-#         return context
 
 
 def category_single(request, slug):
@@ -75,10 +47,10 @@ def login_form(request):
     if request.method == "POST":
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
-        user_validtion = authenticate(
+        user_validation = authenticate(
             request, username=username, password=password)
-        if user_validtion and user_validtion.is_active:
-            login(request, user_validtion)
+        if user_validation and user_validation.is_active:
+            login(request, user_validation)
             print(request.user)
             return redirect('index')
     elif request.method == "GET":
@@ -92,15 +64,12 @@ def logout_form(request):
     return redirect('index')
 
 
+def register_view(request):
+    if request.method == 'POST': # it will execute whene user submit form
+        form = UserRegistrationForm(request.POST)
+        context = {'form': form}
+    else: # it will execute whene form will load
+        form = UserRegistrationForm()
+        context = {'form': form}
 
-def register_view (request):
-    
-    if request.method == 'POST':
-        pass
-    else:
-        for
-
-    context = {}
-    
-
-    return render(request,'blog/register.html',context =context)
+    return render(request, 'blog/register.html', context=context)
