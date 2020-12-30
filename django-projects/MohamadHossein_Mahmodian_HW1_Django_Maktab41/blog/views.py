@@ -6,7 +6,8 @@ from django.urls import reverse
 from django.template import loader
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import authenticate, login, logout
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, CommentForm
+from django.contrib.auth.models import User
 
 
 class Index(ListView):
@@ -19,29 +20,41 @@ class Index(ListView):
         return context
 
 
-def single(request, slug):
+def Single_post(request, slug):
     post = Post.objects.select_related('category', ).get(slug=slug)
     categories = Category.objects.all()
-
+    form = CommentForm(request.POST)
     context = {
+        'comment_form':form,
         'post': post,
         'category': post.category,
         'categories': categories,
         'comment': post.comment.filter(is_confirmed=True)
     }
-
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.author = request.user
+        comment.post = post
+        comment.save()
+    else:
+        context['form'] = form
     return render(request, "blog/post_single.html", context)
 
 
-def category_single(request, slug):
-    category = Category.objects.get(slug=slug)
-    print(slug)
-    cat_slug = Post.objects.filter(category=category)
-    context = {'cat_slug': cat_slug}
-    return render(request, "blog/category_single.html", context)
+class Category_single(DetailView):
+    model = Category
+    template_name = 'blog/category_single.html'
+
+    def get_context_data(self, **kwargs):
+        category = Category.objects.get(slug=self.kwargs.get('slug'))
+        context = super().get_context_data(**kwargs)
+        context['slug'] = self.kwargs.get('slug')
+        context['posts'] = Post.objects.filter(category=category)
+        context['categories'] = Category.objects.all()
+        return context
 
 
-def login_form(request):
+def Login_form(request):
     if request.user.is_authenticated:
         return redirect('index')
     if request.method == "POST":
@@ -59,16 +72,27 @@ def login_form(request):
     return render(request, 'blog/login.html', context={})
 
 
-def logout_form(request):
+def Logout_form(request):
     logout(request)
     return redirect('index')
 
 
-def register_view(request):
-    if request.method == 'POST': # it will execute whene user submit form
+def Register_view(request):
+    if request.method == 'POST':  # it will execute whene user submit form
+
         form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            user = User.objects.create(username=username, email=email, first_name=first_name, last_name=last_name)
+            user.set_password(password)
+            user.save()
+            return redirect('login')
         context = {'form': form}
-    else: # it will execute whene form will load
+    else:  # it will execute whene form will load
         form = UserRegistrationForm()
         context = {'form': form}
 

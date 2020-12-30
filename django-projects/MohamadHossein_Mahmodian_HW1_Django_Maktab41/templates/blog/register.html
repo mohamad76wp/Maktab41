@@ -1,18 +1,39 @@
-{%extends 'base/base.html' %}
-{%load static%}
+{% extends 'base/base.html' %}
+{% load static %}
 
-{%block title%}
+{% block title %}
     Register
-{%endblock%}
+{% endblock %}
 
-{%block body%}
+{% block body %}
     <div class="container">
-    <form action="{% url 'register'%}" method = "post">
-        {%csrf_token%}
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <div class="alert alert-info " role="alert">
+                    <form action="{% url 'register' %}" method="post">
+                        <div class="form-group">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                {{ field.label_tag }}
+                                {{ field }}
+                                <small id="emailHelp" class="alert-info form-text text-muted">
+                                    {{ field.help_text }}
+                                </small>
 
-        {{ form.as_ul }}
-        <input type="submit" value="register">
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
 
-    </form>
+                            {% endfor %}
+                            <input type="submit" value="register" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-4"></div>
+        </div>
     </div>
-{%endblock%}
+{% endblock %}
