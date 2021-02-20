@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'orders',
     'products',
+    'siteview',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'personal_shop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,"template")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
