@@ -26,8 +26,7 @@ SECRET_KEY = '4i%@#wv*t*(v-+39_fzq+@h&n0+mn1@@@+nsto(3m1yadf8wub'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
+AUTH_USER_MODEL = 'account.User'
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,7 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'blog',
+    'account',
 ]
 
 MIDDLEWARE = [

@@ -1,4 +1,3 @@
-
 {%extends 'base/base.html'%}
 {% load static %}
 
@@ -15,35 +14,61 @@ zoomit
 
 <div class="container">
     <div class="row p-5 m-2">
-        <div class="col-8 box-main">
-            <div class="container">
-                {% for post in post_list %}
+        <div class="col-12 box-main">
 
-                <div class="card-deck px-2 pt-3">
-                    <div class="card">
-                        <img src="{{post.image.url}}" class="card-img-top embed-responsive-item" alt="{{post.title}}">
-                        <div class="card-body">
-                            <a class="link" href="{%url 'post_single' post.slug%}">
-                                <h5 class="card-title">{{post.title}}</h5>
-                            </a>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home" role="tab"
+                        aria-controls="nav-home" aria-selected="true">Home</a>
+                    <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" href="#nav-profile" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">Profile</a>
+                    <a class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" href="#nav-contact" role="tab"
+                        aria-controls="nav-contact" aria-selected="false">Contact</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
 
-                            <p class="card-text">{{post.content}}</p>
-                            <p class="card-text"><small class="text-muted">{{post.publish_at}}</small>
-                            <a href="{%url 'category_single' post.category.slug%}"> 
-                                <span class="badge badge-info float-right mb-3">{{post.category}}</span>
-                            </a>
-                        </p>
-
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="row row-cols-1 row-cols-md-3">
+                        <div class="col mb-4">
+                            <div class="card">
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...
+                    </div>
                 </div>
-                {%endfor%}
+
+
+
+
             </div>
         </div>
-        <div class="col-4 box-side">
-            {%include 'blog/side_bar.html'%}
+
+
+
+
+        <div class="row p-5 m-2">
+            <div class="col-8 box-main">
+                <div class="container">
+                    {% for post in posts %}
+                    {{post.category}}
+
+                    {%endfor%}
+                </div>
+            </div>
+            <div class="col-4 box-side">
+                {%include 'blog/side_bar.html'%}
+            </div>
         </div>
     </div>
-</div>
 
-{%endblock%}
+    {%endblock%}

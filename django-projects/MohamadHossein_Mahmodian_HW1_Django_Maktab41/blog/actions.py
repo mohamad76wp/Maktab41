@@ -1,3 +1,5 @@
+#This file is for admin panel to apply actins on group 0f posts, users, categories ...
+#  
 from django.contrib import messages
 from django.utils.translation import ngettext
 

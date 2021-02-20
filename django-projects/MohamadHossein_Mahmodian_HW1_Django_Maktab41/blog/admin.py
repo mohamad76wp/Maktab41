@@ -1,14 +1,15 @@
 from django.contrib import admin
+from .models import Post, Post_setting, Category, Comment, Comment_like
+from .actions import make_publish, make_draft
 
-from .models import Post, Post_setting, Category, Comment, Comment_like, User
 
-from .actions import make_publish , make_draft
 # Register your models here.
 
 
 class ChildrenItemInline(admin.TabularInline):
     model = Category
     fields = [
+        'title',
         "slug",
     ]
     extra = 1
@@ -17,17 +18,16 @@ class ChildrenItemInline(admin.TabularInline):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-
     # show the columns of the admin table
     list_display = ("title", "slug", "parent",)
-    search_fields = ("title", "slug",)  # set fields that search crwal on them
-    list_filter = ("parent",)  # set filds for the filter
+    search_fields = ("title", "slug",)  # set fields that search crawl on them
+    list_filter = ("parent",)  # set fields for the filter
     inlines = [
         ChildrenItemInline,
     ]
 
 
-class PostSettingAdminInline (admin.TabularInline):
+class PostSettingAdminInline(admin.TabularInline):
     model = Post_setting
     fields = [
         "public",
@@ -35,10 +35,10 @@ class PostSettingAdminInline (admin.TabularInline):
         "allow_discussion"
     ]
 
+
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-
-    list_display = ("title", "category", "author", "draft",
+    list_display = ("title", "author", "draft",
                     "publish_at", "create_at", "update_at",)
     list_filter = ("draft", "author",)
     search_fields = ("title",)
@@ -46,8 +46,7 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [
         PostSettingAdminInline,
     ]
-    actions = [make_publish,make_draft]
-
+    actions = [make_publish, make_draft]
 
 
 @admin.register(Comment)

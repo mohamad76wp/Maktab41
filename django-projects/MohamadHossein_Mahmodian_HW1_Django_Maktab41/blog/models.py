@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class Category(models.Model):
@@ -8,7 +9,7 @@ class Category(models.Model):
     slug = models.SlugField(_("Slug"), unique=True, db_index=True)
     parent = models.ForeignKey("self", verbose_name=(
         _("Parent")), related_name="children", related_query_name="children", on_delete=models.SET_NULL, null=True,
-                               blank=True)
+        blank=True)
 
     class Meta:
         verbose_name = _("Category")
@@ -31,10 +32,13 @@ class Post(models.Model):
     publish_at = models.DateTimeField(
         _("Publish at"), db_index=True)
     draft = models.BooleanField(_("Draft"), default=True, db_index=True)
-    image = models.ImageField(_("Image"), upload_to="post/images")
-    category = models.ForeignKey(Category, verbose_name=(
-        _("category")), related_name="category", related_query_name="category", null=True, blank=True,
-                                 on_delete=models.SET_NULL)
+    image = models.ImageField(_("Image"), upload_to="post/images", null=True)
+    # category = models.ForeignKey(Category, verbose_name=(
+    #     _("category")), related_name="category", related_query_name="category", null=True, blank=True,on_delete=models.SET_NULL)
+
+    category = models.ManyToManyField(Category,verbose_name=(
+        _("category")), related_name="category", related_query_name="category", blank=True)
+        
     author = models.ForeignKey(User, verbose_name=(
         _("Author")), related_name="posts", related_query_name="posts", on_delete=models.CASCADE)
 
@@ -102,16 +106,12 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
 
-    # @property
-    # def like_count(self):
-    #     query_set = Comment_like.ojects.filter(comment=self)
-    #     likes = query_set.filter(condition=True)
+    @property
+    def like_count(self):
+        likes = Comment_like.objects.filter(comment=self, condition=True)
+        return likes.count()
 
-    #     return likes.count()
-
-    # @property
-    # def dislike_count(self):
-    #     query_set = Comment_like.objects.filter(comment=self)
-    #     dislikes = query_set.filter(condition=False)
-
-    # return dislikes.count()
+    @property
+    def dislike_count(self):
+        dislikes = Comment_like.objects.filter(comment=self, condition=False)
+        return dislikes.count()
