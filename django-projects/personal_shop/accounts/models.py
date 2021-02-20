@@ -20,10 +20,10 @@ class User(models.Model):
 
 
 class Email(models.Model):
-    user = models.ForeignKey(User, verbose_name=_('User'), on_delete=models.CASCADE, related_name='email',
+    user = models.ForeignKey(User, verbose_name=_('User'), on_delete=models.SET_NULL, null=True, related_name='email',
                              related_query_name='email')
-    subject = models.CharField(_('Subject'), )
-    body = models.CharField(_('Body'), )
+    subject = models.CharField(_('Subject'), max_length=64)
+    body = models.CharField(_('Body'), max_length=256)
 
     class Meta:
         verbose_name = _("Email")
@@ -34,7 +34,7 @@ class Email(models.Model):
 
 
 class Shop(models.Model):
-    user = models.ForeignKey(User, verbose_name=_('User'), on_delete=models.CASCADE, related_name='shop',
+    user = models.ForeignKey(User, verbose_name=_('User'), on_delete=models.SET_NULL, null=True, related_name='shop',
                              related_query_name='shop')
     name = models.CharField(_('Name'), max_length=128)
     slug = models.SlugField(_('Slug'), )
@@ -50,7 +50,8 @@ class Shop(models.Model):
 
 
 class Address(models.Model):
-    user = models.ForeignKey(User, verbose_name=_('User'), related_name='address', related_query_name='address')
+    user = models.ForeignKey(User, verbose_name=_('User'), on_delete=models.SET_NULL, null=True, related_name='address',
+                             related_query_name='address')
     city = models.CharField(_('City'), max_length=32)
     street = models.CharField(_('Street'), max_length=32)
     alley = models.CharField(_('Alley'), max_length=32)
@@ -59,4 +60,3 @@ class Address(models.Model):
     class Meta:
         verbose_name = _("Address")
         verbose_name_plural = _("Address")
-        ordering = ['-create_at']
