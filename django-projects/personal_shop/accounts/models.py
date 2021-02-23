@@ -54,7 +54,7 @@ class User(AbstractUser):
         verbose_name_plural = _("Users")
 
     def __str__(self):
-        return self.first_name
+        return self.username
 
 
 class Email(models.Model):
@@ -71,20 +71,6 @@ class Email(models.Model):
         return self.subject
 
 
-class Shop(models.Model):
-    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.SET_NULL, null=True, related_name="shop",
-                             related_query_name="shop")
-    name = models.CharField(_("Name"), max_length=128)
-    slug = models.SlugField(_("Slug"), )
-    description = models.CharField(_("Description"), max_length=256)
-    logo = models.ImageField(_("Shop logo"), upload_to="media/shop_logo")
-
-    class Meta:
-        verbose_name = _("Shop")
-        verbose_name_plural = _("Shops")
-
-    def __str__(self):
-        return self.name
 
 
 class Address(models.Model):
