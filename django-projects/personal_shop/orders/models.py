@@ -1,9 +1,11 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class Basket(models.Model):
-    user = models.ForeignKey('accounts.User', verbose_name=_('User'), on_delete=models.SET_NULL, null=True,
+    user = models.ForeignKey(User, verbose_name=_('User'), on_delete=models.SET_NULL, null=True,
                              related_name='basket', related_query_name='basket')
 
     class Meta:
@@ -14,7 +16,7 @@ class Basket(models.Model):
 class BasketItem(models.Model):
     basket = models.ForeignKey('Basket', verbose_name=_('Basket'), on_delete=models.SET_NULL, null=True,
                                related_name='basket_item', related_query_name='basket_item', )
-    shop_product = models.ForeignKey('products.ShopProduct', verbose_name=_('User'), on_delete=models.SET_NULL,
+    shop_product = models.ForeignKey('products.ShopProduct', verbose_name=_('shop_product'), on_delete=models.SET_NULL,
                                      null=True, related_name='basket_item', related_query_name='basket_item', )
 
     class Meta:
@@ -23,7 +25,7 @@ class BasketItem(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey('accounts.User', verbose_name=_("User"), on_delete=models.SET_NULL, null=True,
+    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.SET_NULL, null=True,
                              related_name='order', related_query_name='order')
     create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
     update_at = models.DateTimeField(_("Update at"), auto_now_add=True)
@@ -48,7 +50,7 @@ class Payment(models.Model):
     order = models.ForeignKey(Order, verbose_name=_("order"), on_delete=models.SET_NULL, null=True,
                               related_name='payment',
                               related_query_name='payment')
-    user = models.ForeignKey('accounts.User', verbose_name=_("User"), on_delete=models.SET_NULL, null=True,
+    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.SET_NULL, null=True,
                              related_name='payment', related_query_name='payment')
     amount = models.CharField(_('amount'), max_length=16)
 
