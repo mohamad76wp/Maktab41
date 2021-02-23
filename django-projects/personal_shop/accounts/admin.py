@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Email, Shop, Address
+from .models import User, Email,Address
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as UserBaseAdmin
 # Register your models here.
@@ -45,3 +45,4 @@ class UserAdmin(UserBaseAdmin):
         EmailAdmin,
         AddressAdmin,
     )
+
