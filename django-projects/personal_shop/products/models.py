@@ -1,16 +1,19 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class Product(models.Model):
-    name = models.CharField(_('Name'), max_length=64)
-    brand = models.ForeignKey("Brand", verbose_name=_('Brand'), on_delete=models.SET_NULL, null=True,
-                              related_name='Brand',
-                              related_query_name='Brand')
-    category = models.ForeignKey("Category", verbose_name=_('Category'), on_delete=models.SET_NULL, null=True,
-                                 related_name='product', related_query_name='product')
-    slug = models.SlugField(_('Slug'), )
-    image = models.ImageField(_('Image'), upload_to='media/product_image')
-    details = models.CharField(_('Details'), max_length=32)
+    name = models.CharField(_("Name"), max_length=64)
+    brand = models.ForeignKey("Brand", verbose_name=_("Brand"), on_delete=models.SET_NULL, null=True,
+                              related_name="Brand",
+                              related_query_name="Brand")
+    category = models.ForeignKey("Category", verbose_name=_("Category"), on_delete=models.SET_NULL, null=True,
+                                 related_name="product", related_query_name="product")
+    slug = models.SlugField(_("Slug"), )
+    image = models.ImageField(_("Image"), upload_to="media/product_image")
+    details = models.CharField(_("Details"), max_length=32)
     create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
     update_at = models.DateTimeField(_("Update at"), auto_now_add=True)
 
@@ -23,13 +26,13 @@ class Product(models.Model):
 
 
 class ShopProduct(models.Model):
-    shop = models.ForeignKey('accounts.Shop', verbose_name=_('Shop'), on_delete=models.SET_NULL, null=True,
-                             related_name='shop',
-                             related_query_name='shop')
-    product = models.ForeignKey(Product, verbose_name=_('Product'), on_delete=models.SET_NULL, null=True,
-                                 related_name='product', related_query_name='product')
-    price = models.IntegerField(_('Price'))
-    quantity = models.IntegerField(_('Quantity'))
+    shop = models.ForeignKey("Shop", verbose_name=_("Shop"), on_delete=models.SET_NULL, null=True,
+                             related_name="shop",
+                             related_query_name="shop")
+    product = models.ForeignKey(Product, verbose_name=_("Product"), on_delete=models.SET_NULL, null=True,
+                                 related_name="product", related_query_name="product")
+    price = models.IntegerField(_("Price"))
+    quantity = models.IntegerField(_("Quantity"))
     create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
     update_at = models.DateTimeField(_("Update at"), auto_now_add=True)
 
@@ -38,10 +41,28 @@ class ShopProduct(models.Model):
         verbose_name_plural = _("ShopProducts")
 
 
+class Shop(models.Model):
+    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.SET_NULL, null=True, related_name="shop",
+                             related_query_name="shop")
+    name = models.CharField(_("Name"), max_length=128)
+    slug = models.SlugField(_("Slug"), )
+    description = models.CharField(_("Description"), max_length=256)
+    logo = models.ImageField(_("Shop logo"), upload_to="media/shop_logo")
+
+    class Meta:
+        verbose_name = _("Shop")
+        verbose_name_plural = _("Shops")
+
+    def __str__(self):
+        return self.name
+
+
+
+
 class Brand(models.Model):
-    name = models.CharField(_('Name'), max_length=64)
-    details = models.CharField(_('Details'), max_length=64)
-    image = models.ImageField(_('Image'), upload_to='media/brand_image')
+    name = models.CharField(_("Name"), max_length=64)
+    details = models.CharField(_("Details"), max_length=64)
+    image = models.ImageField(_("Image"), upload_to="media/brand_image")
     create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
     update_at = models.DateTimeField(_("Update at"), auto_now_add=True)
 
@@ -54,12 +75,12 @@ class Brand(models.Model):
 
 
 class Category(models.Model):
-    category = models.ForeignKey('Category', verbose_name=_('Category'), on_delete=models.SET_NULL, null=True,
-                                 related_name='child', related_query_name='child')
-    slug = models.SlugField(_('Slug'), )
-    name = models.CharField(_('Name'), max_length=32)
-    details = models.CharField(_('Details'), max_length=32)
-    image = models.ImageField(_('Image'), upload_to='media/category_image')
+    name = models.CharField(_("Name"), max_length=32)
+    slug = models.SlugField(_("Slug"), )
+    category = models.ForeignKey("Category", verbose_name=_("Category"), on_delete=models.SET_NULL, null=True,
+                                 related_name="child", related_query_name="child")
+    details = models.CharField(_("Details"), max_length=32)
+    image = models.ImageField(_("Image"), upload_to="media/category_image")
     create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
     update_at = models.DateTimeField(_("Update at"), auto_now_add=True)
 
@@ -71,14 +92,12 @@ class Category(models.Model):
         return self.name
 
 
-
-
 class Discount(models.Model):
-    title = models.CharField(_('Title'), max_length=128)
-    product = models.ForeignKey("Product", verbose_name=_("product"), related_name='Discount_product',
-                                related_query_name='Discount_product', on_delete=models.SET_NULL, null=True)
-    value = models.IntegerField(_('Value'))
-    is_percent = models.BooleanField(_('Is Percent'), default=True)
+    title = models.CharField(_("Title"), max_length=128)
+    product = models.ForeignKey("Product", verbose_name=_("product"), related_name="Discount_product",
+                                related_query_name="Discount_product", on_delete=models.SET_NULL, null=True)
+    value = models.IntegerField(_("Value"))
+    is_percent = models.BooleanField(_("Is Percent"), default=True)
     create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
     update_at = models.DateTimeField(_("Update at"), auto_now_add=True)
     expire_at = models.DateTimeField(_("Create at"), auto_now_add=True)
@@ -93,28 +112,28 @@ class Discount(models.Model):
 
 class Comment(models.Model):
     content = models.TextField(_("Content"))
-    product = models.ForeignKey("Product", verbose_name=_("Product"), related_name='comment',
-                                related_query_name='comment', on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey("Product", verbose_name=_("Product"), related_name="comment",
+                                related_query_name="comment", on_delete=models.SET_NULL, null=True)
     create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
     update_at = models.DateTimeField(_("Update at"), auto_now=True)
-    user = models.ForeignKey('accounts.User', verbose_name=_(
+    user = models.ForeignKey(User, verbose_name=_(
         "User"), on_delete=models.SET_NULL, null=True)
     is_confirmed = models.BooleanField(_("confirm"), default=True)
 
     class Meta:
         verbose_name = _("Comment")
         verbose_name_plural = _("Comments")
-        ordering = ['-create_at']
+        ordering = ["-create_at"]
 
     def __str__(self):
         return self.post.title
 
 
 class ProductMeta(models.Model):
-    product = models.ForeignKey(Product, verbose_name=_("Product"), related_name='productMeta',
-                                related_query_name='productMeta', on_delete=models.SET_NULL, null=True)
-    label = models.CharField(_('Label'), max_length=32)
-    value = models.IntegerField(_('Value'), )
+    product = models.ForeignKey(Product, verbose_name=_("Product"), related_name="productMeta",
+                                related_query_name="productMeta", on_delete=models.SET_NULL, null=True)
+    label = models.CharField(_("Label"), max_length=32)
+    value = models.IntegerField(_("Value"), )
 
     class Meta:
         verbose_name = _("ProductMeta")
@@ -125,9 +144,9 @@ class ProductMeta(models.Model):
 
 
 class Like(models.Model):
-    user = models.ForeignKey('accounts.User', verbose_name=_('User'), on_delete=models.SET_NULL, null=True,
-                             related_name='like',
-                             related_query_name='like')
-    product = models.ForeignKey(Product, verbose_name=_('Product'), on_delete=models.SET_NULL, null=True,
-                                related_name='like',
-                                related_query_name='like')
+    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.SET_NULL, null=True,
+                             related_name="like",
+                             related_query_name="like")
+    product = models.ForeignKey(Product, verbose_name=_("Product"), on_delete=models.SET_NULL, null=True,
+                                related_name="like",
+                                related_query_name="like")
