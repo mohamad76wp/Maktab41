@@ -1,0 +1,9 @@
+.bg-light {
+    background-color: transparent !important;
+    border-top: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.navbar-light .navbar-brand{
+    color: red;
+}
