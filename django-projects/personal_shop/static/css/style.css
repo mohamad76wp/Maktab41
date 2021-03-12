@@ -1,9 +1,29 @@
-.bg-light {
-    background-color: transparent !important;
-    border-top: 1px solid #dcdcdc;
-    border-bottom: 1px solid #dcdcdc;
+.card {
+    max-width: 230px;
 }
 
-.navbar-light .navbar-brand{
-    color: red;
+.bg-gradiant {
+background: #06beb6;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #48b1bf, #06beb6);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #48b1bf, #06beb6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    
+}
+.bg-Purpink {
+background: #7F00FF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #E100FF, #7F00FF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+.btn-primary{
+    background-color: #ff5e57;
+    border-color: #ff5e57;
+    
+}
+
+.border-custom{
+    /* border-color: darkgray; */
+    border-radius: .25rem;
+    box-shadow: 0 0 12px rgba(0,0,0,.1) !important;
 }
