@@ -1,11 +1,10 @@
 #by admin
-.gitignore
 other/
 .idea/
 training/
 zoomit-mohsen/  
 zoomit-ostad/
-
+django-projects/personal_shop/static/IMG_TEMP/**
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -121,3 +120,4 @@ media/
 # **/migrations/**
 # !**/migrations
 # !**/migrations/__init__.py
+
