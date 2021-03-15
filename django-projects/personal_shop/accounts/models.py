@@ -39,7 +39,7 @@ class User(AbstractUser):
     email = models.EmailField(_("Email"), unique=True,
                               db_index=True, max_length=256)
     password = models.CharField(_("Password"), max_length=64)
-    mobile = models.CharField(_("Mobile"), max_length=12, unique=True)
+    mobile = models.CharField(_("Mobile"), max_length=12)
     fullname = models.CharField(_("First Name"), max_length=64)
     image = models.ImageField(_("Profile Image"), upload_to="media/profile")
 
