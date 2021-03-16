@@ -30,7 +30,7 @@ class Carousel(models.Model):
 
 
 def upload_gallery_image(instance, filename):
-    return f"media/carousel_image/{instance.carousel.name}_{filename}"
+    return f"carousel_image/{instance.carousel.name}_{filename}"
 
 
 class Carousel_image(models.Model):
