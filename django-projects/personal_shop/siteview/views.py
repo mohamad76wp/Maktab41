@@ -11,3 +11,9 @@ def Index(request):
     
     return render(request, "site_view/index.html", context)
 
+
+
+def product_single(request):
+    context = {"1":"2"}
+
+    return render(request,"site_view/product_single.html",context)
