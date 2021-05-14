@@ -1,38 +1,86 @@
-.card {
+.card-mxw {
     max-width: 230px;
 }
 
 .bg-gradiant {
-background: #06beb6;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #48b1bf, #06beb6);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #48b1bf, #06beb6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-    
+    background: #06beb6;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #48b1bf, #06beb6);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #48b1bf, #06beb6);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
 .bg-Purpink {
-background: #7F00FF;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #E100FF, #7F00FF);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #7F00FF;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #E100FF, #7F00FF);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #E100FF, #7F00FF);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-
-.btn-primary{
+.btn-primary {
     background-color: #ff5e57;
-    border-color: #ff5e57;
-    
-}
+    border-color: #ff5e57;}
 
-.border-custom{
+.border-custom {
     /* border-color: darkgray; */
     border-radius: .25rem;
-    box-shadow: 0 0 12px rgba(0,0,0,.1) !important;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .1) !important;
 }
 
-
-.img-cstm{
-    position:relative;
+.cc-parent {
+    position: relative;
 }
 
-.overlay {
+.cc-parent .overlay {
     position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 25px;
+    bottom: 0px;
+}
+
+.fa-heart-o, .fa-bookmark-o, .fa-exchange {
+    color: #747d8c;
+}
+
+.fa-heart-o:hover{
+    color: #ff4757;
+}
+
+.fa-check-square-o{
+    color: #3498db;
+}
+
+.fa-bookmark-o:hover{
+    color: #27ae60;
+}
+
+.fa-exchange:hover{
+    color: #2980b9;
+}
+
+.pf-title{
+    font-weight: 700;
+}
+
+.sub-title,.pf-item{
+    font-size: .75rem;
+}
+
+.pf-item-more{
+    font-size: .65rem;
+}
+
+
+.hr-75{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.box-border-bottom{
+    border-bottom: 0.1rem solid rgba(0, 0, 0, .1);
+    margin: 0rem 2rem;
 }
